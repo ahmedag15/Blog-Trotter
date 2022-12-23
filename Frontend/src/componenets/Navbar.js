@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { AppBar, Box, Button, Tab, Tabs, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux'
+import { authActions } from '../store';
 
 const Navbar = () => {
+  
   const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const dispatch = useDispatch();
   const [value, setValue] = useState();
 
 
@@ -34,7 +38,7 @@ const Navbar = () => {
             </>
           }
           {isLoggedIn &&
-            <Button LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: 1, borderRadius: 10 }} color='warning'>Logout</Button>
+            <Button onClick={() => dispatch(authActions.logout())} LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: 1, borderRadius: 10 }} color='warning'>Logout</Button>
           }
         </Box>
       </Toolbar>
