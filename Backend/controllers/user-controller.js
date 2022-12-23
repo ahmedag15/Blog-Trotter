@@ -1,6 +1,7 @@
 import User from "../model/User";
 import bcrypt from 'bcryptjs';
 
+// Get all users
 export const getAlluser = async (req, res, next) => {
     let users;
     try {
@@ -14,6 +15,7 @@ export const getAlluser = async (req, res, next) => {
     return res.status(200).json({ users });
 };
 
+// User signup
 export const signup = async (req, res, next) => {
     const { name, email, password } = req.body;
 
@@ -32,6 +34,7 @@ export const signup = async (req, res, next) => {
         name,
         email,
         password: hashedPassword,
+        blogs: [],
     });
 
     try {
@@ -39,10 +42,11 @@ export const signup = async (req, res, next) => {
     } catch (err) {
         return console.log(err);
     }
-    return res.status(201).json({ user })
+    return res.status(201).json({ user });
 
 };
 
+// User login
 export const login = async (req, res, next) => {
     const { email, password } = req.body;
     let existingUser;
@@ -57,7 +61,7 @@ export const login = async (req, res, next) => {
     }
     const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
     if (!isPasswordCorrect) {
-        return res.status(400).json({ message: " Incorrect Password! " })
+        return res.status(400).json({ message: " Incorrect Password! " });
     }
-    return res.status(200).json({ message: " You are logged in " })
+    return res.status(200).json({ message: " You are logged in " });
 };
