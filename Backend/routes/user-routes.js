@@ -1,9 +1,9 @@
 import express from 'express';
-import { getAlluser, signup, login } from '../controllers/user-controller';
+import { getAllusers, signup, login } from '../controllers/user-controller';
 
 const userRouter = express.Router();
 
-userRouter.get("/", getAlluser);
+userRouter.get("/", getAllusers);
 userRouter.post("/signup", signup);
 userRouter.post("/login", login );
 

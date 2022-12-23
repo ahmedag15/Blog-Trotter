@@ -2,7 +2,7 @@ import User from "../model/User";
 import bcrypt from 'bcryptjs';
 
 // Get all users
-export const getAlluser = async (req, res, next) => {
+export const getAllusers = async (req, res, next) => {
     let users;
     try {
         users = await User.find();
