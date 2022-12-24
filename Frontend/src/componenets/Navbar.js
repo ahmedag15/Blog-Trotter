@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { authActions } from '../store';
 
 const Navbar = () => {
-  
+
   const isLoggedIn = useSelector(state => state.isLoggedIn);
   const dispatch = useDispatch();
   const [value, setValue] = useState();
@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <AppBar position='sticky' sx={{
       background:
-        "linear-gradient(90deg, rgba(2,0,36,1) 2%, rgba(0,58,161,1) 36%, rgba(0,212,255,1) 100%);"
+        "linear-gradient(90deg, rgba(2,0,36,1) 2%, rgba(0,58,161,1) 36%, rgba(0,212,255,1) 100%)"
     }}
     >
       <Toolbar>
@@ -26,6 +26,7 @@ const Navbar = () => {
             <Tabs textColor='inherit' value={value} onChange={(e, val) => setValue(val)}>
               <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
               <Tab LinkComponent={Link} to="/myblogs" label="My Blogs" />
+              <Tab LinkComponent={Link} to="/blogs/add" label="Add Blog" />
             </Tabs>
           </Box>
         }
