@@ -41,7 +41,7 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
-                            {/* {userName} */}
+                            {userName.substring(0,1)}
                         </Avatar>
                     }
 
