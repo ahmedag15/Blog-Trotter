@@ -2,9 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 //const cookieParser = require("cookie-parser");
-// const requireAuth = require("./middleware/requireAuth");
+//const requireAuth = require("./middleware/requireAuth");
 const userRouter = require("./routes/user-routes.js");
 const blogRouter = require("./routes/blog-routes.js");
+
+if (process.env.Node_ENV != "production") {
+    require("dotenv").config();
+}
 
 
 const app = express();

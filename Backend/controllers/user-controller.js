@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../model/User.js");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // Get all users
 exports.getAllusers = async (req, res, next) => {
@@ -64,8 +65,8 @@ exports.login = async (req, res, next) => {
     if (!isPasswordCorrect) {
         return res.status(400).json({ message: " Incorrect Password! " });
     }
-    // const exp = Date.now() + 1000 * 60;
-    // const token = jwt.sign({ sub: existingUser._id, exp }, process.env.JWT_SECRET);
+    const exp = Date.now() + 1000 * 60;
+    const token = jwt.sign({ sub: existingUser._id, exp }, process.env.JWT_SECRET);
 
     // res.cookie("Authorization", token, {
     //     expires: new Date(exp),
@@ -74,7 +75,7 @@ exports.login = async (req, res, next) => {
     //     secure: process.env.NODE_ENV === "production",
     // })
 
-    return res.status(200).json({ message: " You are logged in ", user: existingUser });
+    return res.status(200).json({ message: " You are logged in ", user: existingUser, token});
 };
 
 // Check Authentication
