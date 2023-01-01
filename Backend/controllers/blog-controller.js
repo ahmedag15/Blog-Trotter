@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
-import Blog from "../model/Blog";
-import User from "../model/User";
+const mongoose = require("mongoose");
+const Blog = require("../model/Blog.js");
+const User = require("../model/User.js");
 
 // Get All blogs
-export const getAllBlogs = async (req, res, next) => {
+exports.getAllBlogs = async (req, res, next) => {
     let blogs;
     try {
         blogs = await Blog.find().populate('user');
@@ -17,7 +17,7 @@ export const getAllBlogs = async (req, res, next) => {
 };
 
 // Get a specific blog
-export const getbyId = async (req, res, next) => {
+exports.getbyId = async (req, res, next) => {
     const blogId = req.params.id;
     let blog;
     try {
@@ -32,7 +32,7 @@ export const getbyId = async (req, res, next) => {
 };
 
 // Get a blog by User id
-export const getbyUserId = async (req, res, next) => {
+exports.getbyUserId = async (req, res, next) => {
     const userId = req.params.id;
     let userBlogs;
     try {
@@ -48,7 +48,7 @@ export const getbyUserId = async (req, res, next) => {
 
 
 // Add a blog
-export const addBlog = async (req, res, next) => {
+exports.addBlog = async (req, res, next) => {
     const { title, description, image, user } = req.body;
 
     let existingUser;
@@ -84,7 +84,7 @@ export const addBlog = async (req, res, next) => {
 };
 
 // Update a blog
-export const updateBlog = async (req, res, next) => {
+exports.updateBlog = async (req, res, next) => {
     const { title, description } = req.body;
     const blogId = req.params.id;
     let blog;
@@ -105,7 +105,7 @@ export const updateBlog = async (req, res, next) => {
 };
 
 // Delete a blog
-export const deleteBlog = async (req, res, next) => {
+exports.deleteBlog = async (req, res, next) => {
     const blogId = req.params.id;
     let blog;
     try {

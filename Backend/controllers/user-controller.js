@@ -1,8 +1,9 @@
-import User from "../model/User";
-import bcrypt from 'bcryptjs';
+const mongoose = require("mongoose");
+const User = require("../model/User.js");
+const bcrypt = require("bcryptjs");
 
 // Get all users
-export const getAllusers = async (req, res, next) => {
+exports.getAllusers = async (req, res, next) => {
     let users;
     try {
         users = await User.find();
@@ -16,7 +17,7 @@ export const getAllusers = async (req, res, next) => {
 };
 
 // User signup
-export const signup = async (req, res, next) => {
+exports.signup = async (req, res, next) => {
     const { name, email, password } = req.body;
 
     let existingUser;
@@ -47,7 +48,7 @@ export const signup = async (req, res, next) => {
 };
 
 // User login
-export const login = async (req, res, next) => {
+exports.login = async (req, res, next) => {
     const { email, password } = req.body;
     let existingUser;
     try {
@@ -63,5 +64,21 @@ export const login = async (req, res, next) => {
     if (!isPasswordCorrect) {
         return res.status(400).json({ message: " Incorrect Password! " });
     }
+    // const exp = Date.now() + 1000 * 60;
+    // const token = jwt.sign({ sub: existingUser._id, exp }, process.env.JWT_SECRET);
+
+    // res.cookie("Authorization", token, {
+    //     expires: new Date(exp),
+    //     httpOnly: true,
+    //     sameSite: "lax",
+    //     secure: process.env.NODE_ENV === "production",
+    // })
+
     return res.status(200).json({ message: " You are logged in ", user: existingUser });
 };
+
+// Check Authentication
+// exports.checkAuth = (req, res) => {
+
+//     res.sendStatus(200);
+// };
